@@ -1,0 +1,59 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  datasource:
+    url: "jdbc:p6spy:h2:mem:testdb;DB_CLOSE_DELAY=-1"
+    driverClassName: "org.h2.Driver"
+    username: sa
+    password: sa
+    platform: h2
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+server:
+   servlet:
+      context-path: /reading-is-good
+management:
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+   info:
+      git:
+         mode: full
+   endpoint:
+      health:
+         probes:
+            enabled: true
+         group:
+            readiness:
+               include: '*'
+               show-details: always
+            liveness:
+               include: '*'
+               show-details: never
+   health:
+      livenessstate:
+         enabled: true
+      readinessstate:
+         enabled: true
+api:
+  authorization:
+    users:
+      admin:
+        password: "{noop}admin"
+        config:
+          timeout: true
+          roles:
+            - ADMIN
+      user:
+        password: "{noop}user"
+        config:
+          timeout: true
+          roles:
+            - USER
