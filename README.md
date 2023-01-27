@@ -40,7 +40,7 @@ Via IDE
 
 •Try exploring APIs via Swagger-ui 'http://localhost:8080/reading-is-good/swagger-ui.html' OR
 
-•Open Postman and Import collection and Explore APIs via that. 'Reading-Is-Good.postman_collection.json'
+•Open Postman and Import collection and Explore APIs via that. 
  
 http://localhost:8080/reading-is-good/h2-console
 
@@ -56,13 +56,15 @@ http://localhost:8080/reading-is-good/swagger-ui.html
 
 •Try exploring APIs via Swagger-ui 'http://localhost:8080/reading-is-good/swagger-ui.html' OR
 
-•Open Postman and Import collection and Explore APIs via that. 'Reading-Is-Good.postman_collection.json'
+•Open Postman and Import collection and Explore APIs via that. 
 
 #Database H2
 
 • Visit 'http://localhost:8080/reading-is-good/h2-console' on browser.
 
 • User Name: ='sa' and Password: = 'sa'.
+
+- *Postman Collection:* [Download](https://github.com/rahmiozturk/reading-is-good/blob/devel-master/src/main/resources/Reading-Is-Good.postman_collection.json)
 
 ## Writer
 
