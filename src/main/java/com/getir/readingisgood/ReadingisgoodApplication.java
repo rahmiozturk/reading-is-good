@@ -6,10 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.getir.readingisgood")
-public class ReadingisgoodApplication {
+public class ReadingIsGoodApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReadingisgoodApplication.class, args);
+		SpringApplication.run(ReadingIsGoodApplication.class, args);
 	}
 
 }
