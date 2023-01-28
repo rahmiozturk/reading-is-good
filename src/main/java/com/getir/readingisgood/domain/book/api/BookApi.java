@@ -28,12 +28,11 @@ public interface BookApi {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Update Book Stock Response") })
 	public ResponseEntity<BookDto> updateBookStock(@Valid @RequestBody UpdateBookStockRequest request);
 
-	@ApiOperation(value = "", notes = "Get Book By Id", nickname = "getBookById", tags = {
-			"Book_API" }, consumes = "application/json, application/xml", produces = "application/json, application/xml")
+	@ApiOperation(value = "", notes = "Get Book By Id", nickname = "getBookById", tags = { "Book_API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Get Book Response") })
 	public ResponseEntity<BookDto> getBookById(Long bookId);
 
-	@ApiOperation(value = "", notes = "Get Book Pageable", nickname = "trackingTheStockOfBbooks", tags = { "Book_API" })
+	@ApiOperation(value = "", notes = "Get Book Pageable", nickname = "trackingTheStockOfBooks", tags = { "Book_API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Get Books  Response") })
 	public ResponseEntity<ApiPagingResponse<BookDto>> getBooks(
 			@RequestParam(value = "PAGE", defaultValue = "0") int page,

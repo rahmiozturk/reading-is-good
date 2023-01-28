@@ -27,8 +27,7 @@ import com.getir.readingisgood.domain.order.model.OrderDto;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping(value = "/customer", consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE }, produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
+@RequestMapping(value = "/customer", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
 @SoftwareComponent(name = "CustomerController", description = "Exposes end points to customer process.", technologies = {
 		"java", "rest", "https" })
 @Slf4j
@@ -47,7 +46,8 @@ public class CustomerController implements CustomerApi {
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<ApiPagingResponse<CustomerDto>> getCustomers(@RequestParam(value = "PAGE", defaultValue = "0") int page,
+	public ResponseEntity<ApiPagingResponse<CustomerDto>> getCustomers(
+			@RequestParam(value = "PAGE", defaultValue = "0") int page,
 			@RequestParam(value = "SIZE", defaultValue = "10") int size) {
 		log.info("getCustomers page {} - size  {}", page, size);
 		return new ResponseEntity<>(customerService.getCustomers(page, size), HttpStatus.OK);
@@ -64,11 +64,11 @@ public class CustomerController implements CustomerApi {
 		log.info("getAllOrders customerId {}", customerId);
 		return new ResponseEntity<>(customerService.getAllOrders(customerId), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}/stats")
 	public ResponseEntity<List<CustomerReportDto>> getCustomerStats(@PathVariable("id") Long customerId) {
 		log.info("getCustomerStats customerId {}", customerId);
-        return new ResponseEntity<>(customerService.getStatsReport(customerId), HttpStatus.OK);
-    }
+		return new ResponseEntity<>(customerService.getStatsReport(customerId), HttpStatus.OK);
+	}
 
 }

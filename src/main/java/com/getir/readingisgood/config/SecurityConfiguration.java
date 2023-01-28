@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,9 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic().and()
 				.authorizeRequests().antMatchers("/reading-is-good/admin/**").hasRole("ADMIN")
-				.antMatchers("/reading-is-good/user/**").hasRole("USER")
-				.antMatchers("/**").permitAll().anyRequest().denyAll().and().csrf()
-				.disable().formLogin().disable();
+				.antMatchers("/reading-is-good/user/**").hasRole("USER").antMatchers("/**").permitAll().anyRequest()
+				.denyAll().and().csrf().disable().formLogin().disable();
 	}
 
 	/**
@@ -38,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(WebSecurity web) {
-		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**","/h2-console/**",
+		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/h2-console/**",
 				"/configuration/security", "/swagger-ui.html", "/webjars/**");
 	}
 

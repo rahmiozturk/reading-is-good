@@ -26,8 +26,7 @@ import com.getir.readingisgood.domain.book.model.request.UpdateBookStockRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping(value = "/book", consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE }, produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
+@RequestMapping(value = "/book", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
 @SoftwareComponent(name = "BookController", description = "Exposes end points to book process.", technologies = {
 		"java", "rest", "https" })
 @Slf4j

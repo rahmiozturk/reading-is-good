@@ -27,8 +27,7 @@ import com.getir.readingisgood.domain.order.model.request.DateIntervalRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping(value = "/order", consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE }, produces = {
-		APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
+@RequestMapping(value = "/order", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
 @SoftwareComponent(name = "OrderController", description = "Exposes end points to order process.", technologies = {
 		"java", "rest", "https" })
 @Slf4j
