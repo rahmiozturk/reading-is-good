@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.getir.readingisgood.common.BaseEntity;
+import com.getir.readingisgood.common.model.BaseEntity;
 import com.getir.readingisgood.domain.customer.entity.CustomerEntity;
 
 import lombok.AllArgsConstructor;

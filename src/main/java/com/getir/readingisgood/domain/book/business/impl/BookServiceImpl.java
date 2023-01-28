@@ -1,10 +1,11 @@
 package com.getir.readingisgood.domain.book.business.impl;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.getir.readingisgood.common.model.ApiPagingResponse;
 import com.getir.readingisgood.domain.book.business.BookService;
 import com.getir.readingisgood.domain.book.converter.BookConverter;
 import com.getir.readingisgood.domain.book.data.BookDataService;
@@ -49,11 +50,16 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<BookDto> getBooks(int page, int size) {
-		List<BookEntity> entityList = bookDataService.getBooks(page, size);
-		List<BookDto> dtoList = entityList.stream().map(entity -> bookConverter.convertToDto(entity))
-				.collect(Collectors.toList());
-		return dtoList;
+	public ApiPagingResponse<BookDto> getBooks(int page, int size) {
+		Page<BookEntity> books = bookDataService.getBooks(page, size);
+
+		ApiPagingResponse<BookDto> pagingResponse = new ApiPagingResponse<>();
+		pagingResponse.setCurrentPage(books.getNumber());
+		pagingResponse.setTotalItemCount(books.getTotalElements());
+		pagingResponse.setTotalPageCount(books.getTotalPages());
+		pagingResponse.setItems(
+				books.stream().map(entity -> bookConverter.convertToDto(entity)).collect(Collectors.toList()));
+		return pagingResponse;
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.getir.readingisgood.common.exception.OrderIdNotFoundException;
+import com.getir.readingisgood.domain.customer.model.CustomerReportDto;
 import com.getir.readingisgood.domain.order.entity.OrderDetailEntity;
 import com.getir.readingisgood.domain.order.entity.OrderEntity;
 import com.getir.readingisgood.domain.order.repository.OrderDetailRepository;
@@ -43,5 +44,9 @@ public class OrderDataService {
 
 	public List<OrderEntity> findAllByOrderTimeBetween(Date startDate, Date endDate) {
 		return orderRepository.findAllByOrderTimeBetween(startDate, endDate);
+	}
+
+	public List<CustomerReportDto> getStatsReport(Long customerId) {
+		return orderRepository.getStatsReport(customerId);
 	}
 }

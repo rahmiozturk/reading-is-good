@@ -1,7 +1,5 @@
 package com.getir.readingisgood.domain.customer.data;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -27,10 +25,10 @@ public class CustomerDataService {
 		return customerRepository.save(entity);
 	}
 
-	public List<CustomerEntity> getCustomers(int page, int size) {
+	public Page<CustomerEntity> getCustomers(int page, int size) {
 		PageRequest pageRequest = PageRequest.of(page, size, Sort.by("name").ascending());
 		Page<CustomerEntity> customers = customerRepository.findAll(pageRequest);
-		return customers.getContent();
+		return customers;
 	}
 
 	public CustomerEntity getCustomerById(Long customerId) {

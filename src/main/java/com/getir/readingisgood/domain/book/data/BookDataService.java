@@ -1,7 +1,5 @@
 package com.getir.readingisgood.domain.book.data;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -30,10 +28,10 @@ public class BookDataService {
 		return bookRepository.findById(bookId).orElseThrow(BookIdNotFoundException::new);
 	}
 
-	public List<BookEntity> getBooks(int page, int size) {
+	public Page<BookEntity> getBooks(int page, int size) {
 		PageRequest pageRequest = PageRequest.of(page, size, Sort.by("bookName").ascending());
 		Page<BookEntity> customers = bookRepository.findAll(pageRequest);
-		return customers.getContent();
+		return customers;
 	}
 
 }

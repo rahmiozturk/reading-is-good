@@ -16,6 +16,7 @@ import com.getir.readingisgood.domain.book.data.BookDataService;
 import com.getir.readingisgood.domain.book.entity.BookEntity;
 import com.getir.readingisgood.domain.customer.data.CustomerDataService;
 import com.getir.readingisgood.domain.customer.entity.CustomerEntity;
+import com.getir.readingisgood.domain.customer.model.CustomerReportDto;
 import com.getir.readingisgood.domain.order.business.OrderService;
 import com.getir.readingisgood.domain.order.converter.OrderConverter;
 import com.getir.readingisgood.domain.order.converter.OrderDetailConverter;
@@ -118,6 +119,11 @@ public class OrderServiceImpl implements OrderService {
 				.findAllByOrderTimeBetween(dateIntervalRequest.getStartDate(), dateIntervalRequest.getEndDate())
 				.stream().map(orderEntity -> orderConverter.convertToDto(orderEntity)).collect(Collectors.toList());
 
+	}
+
+	@Override
+	public List<CustomerReportDto> getStatsReport(Long customerId) {
+		return orderDataService.getStatsReport(customerId);
 	}
 
 }

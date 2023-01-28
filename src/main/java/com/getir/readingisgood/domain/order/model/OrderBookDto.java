@@ -1,7 +1,8 @@
 package com.getir.readingisgood.domain.order.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,8 @@ import lombok.Data;
 public class OrderBookDto {
 	@NotNull
 	private Long bookId;
-	@Size(min = 1)
+	
+	@Min(1)
+	@Max(100)
 	private Integer amount;
 }

@@ -1,4 +1,4 @@
-package com.getir.readingisgood.common;
+package com.getir.readingisgood.common.model;
 
 import java.io.Serializable;
 import java.util.Date;

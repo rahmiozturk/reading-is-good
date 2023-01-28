@@ -9,11 +9,8 @@ import com.getir.readingisgood.domain.customer.model.request.CreateCustomerReque
 @Component
 public class CustomerConverter {
 	public CustomerDto convertToDto(CustomerEntity entity) {
-		return CustomerDto.builder().id(entity.getId()).build();
-	}
-
-	public CustomerEntity convertToEntity(CustomerDto dto) {
-		return CustomerEntity.builder().id(dto.getId()).build();
+		return CustomerDto.builder().id(entity.getId()).name(entity.getName()).surname(entity.getSurname())
+				.email(entity.getEmail()).phoneNumber(entity.getPhoneNumber()).build();
 	}
 
 	public CustomerEntity convertToEntity(CreateCustomerRequest req) {
@@ -23,7 +20,5 @@ public class CustomerConverter {
 		entity.setSurname(req.getSurname());
 		entity.setPhoneNumber(req.getPhoneNumber());
 		return entity;
-//		return CustomerEntity.builder().name(req.getName()).surname(req.getSurname()).email(req.getEmail())
-//				.phoneNumber(req.getPhoneNumber()).build();
 	}
 }

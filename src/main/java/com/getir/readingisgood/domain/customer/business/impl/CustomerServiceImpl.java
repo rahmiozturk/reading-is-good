@@ -3,13 +3,16 @@ package com.getir.readingisgood.domain.customer.business.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.getir.readingisgood.common.model.ApiPagingResponse;
 import com.getir.readingisgood.domain.customer.business.CustomerService;
 import com.getir.readingisgood.domain.customer.converter.CustomerConverter;
 import com.getir.readingisgood.domain.customer.data.CustomerDataService;
 import com.getir.readingisgood.domain.customer.entity.CustomerEntity;
 import com.getir.readingisgood.domain.customer.model.CustomerDto;
+import com.getir.readingisgood.domain.customer.model.CustomerReportDto;
 import com.getir.readingisgood.domain.customer.model.request.CreateCustomerRequest;
 import com.getir.readingisgood.domain.order.business.OrderService;
 import com.getir.readingisgood.domain.order.model.OrderDto;
@@ -42,16 +45,27 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<CustomerDto> getCustomers(int page, int size) {
-		List<CustomerEntity> entityList = customerDataService.getCustomers(page, size);
-		List<CustomerDto> dtoList = entityList.stream().map(entity -> customerConverter.convertToDto(entity))
-				.collect(Collectors.toList());
-		return dtoList;
+	public ApiPagingResponse<CustomerDto> getCustomers(int page, int size) {
+		Page<CustomerEntity> customers = customerDataService.getCustomers(page, size);
+
+		ApiPagingResponse<CustomerDto> pagingResponse = new ApiPagingResponse<>();
+		pagingResponse.setCurrentPage(customers.getNumber());
+		pagingResponse.setTotalItemCount(customers.getTotalElements());
+		pagingResponse.setTotalPageCount(customers.getTotalPages());
+		pagingResponse.setItems(
+				customers.stream().map(entity -> customerConverter.convertToDto(entity)).collect(Collectors.toList()));
+		return pagingResponse;
+
 	}
 
 	@Override
 	public List<OrderDto> getAllOrders(Long customerId) {
 		return orderService.getOrdersByCustomerId(customerId);
+	}
+
+	@Override
+	public List<CustomerReportDto> getStatsReport(Long customerId) {
+		return orderService.getStatsReport(customerId);
 	}
 
 }

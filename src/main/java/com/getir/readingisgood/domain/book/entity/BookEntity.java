@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.getir.readingisgood.common.BaseEntity;
+import com.getir.readingisgood.common.model.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

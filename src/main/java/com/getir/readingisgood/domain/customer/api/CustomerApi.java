@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.getir.readingisgood.common.model.ApiPagingResponse;
 import com.getir.readingisgood.domain.customer.model.CustomerDto;
+import com.getir.readingisgood.domain.customer.model.CustomerReportDto;
 import com.getir.readingisgood.domain.customer.model.request.CreateCustomerRequest;
 import com.getir.readingisgood.domain.order.model.OrderDto;
 
@@ -25,7 +27,8 @@ public interface CustomerApi {
 
 	@ApiOperation(value = "", notes = "Get Customers", nickname = "getCustomers", tags = { "Customer_API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Get Customers Response") })
-	public ResponseEntity<List<CustomerDto>> getCustomers(@RequestParam(value = "PAGE", defaultValue = "0") int page,
+	public ResponseEntity<ApiPagingResponse<CustomerDto>> getCustomers(
+			@RequestParam(value = "PAGE", defaultValue = "0") int page,
 			@RequestParam(value = "SIZE", defaultValue = "10") int size);
 
 	@ApiOperation(value = "", notes = "Get Customer By Id", nickname = "getCustomerById", tags = { "Customer_API" })
@@ -35,4 +38,8 @@ public interface CustomerApi {
 	@ApiOperation(value = "", notes = "Get Customer Orders", nickname = "getAllOrders", tags = { "Customer_API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Get Customer Orders Response") })
 	public ResponseEntity<List<OrderDto>> getAllOrders(@PathVariable("id") Long customerId);
+
+	@ApiOperation(value = "", notes = "Get Customer Stats", nickname = "getCustomerStats", tags = { "Customer_API" })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Get Customer Report Response") })
+	public ResponseEntity<List<CustomerReportDto>> getCustomerStats(@PathVariable("id") Long customerId);
 }

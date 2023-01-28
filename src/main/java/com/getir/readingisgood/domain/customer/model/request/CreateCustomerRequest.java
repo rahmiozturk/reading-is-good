@@ -21,6 +21,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 public class CreateCustomerRequest {
 
+	@NotNull
 	private String name;
 	private String surname;
 

@@ -1,7 +1,6 @@
 package com.getir.readingisgood.domain.book.business;
 
-import java.util.List;
-
+import com.getir.readingisgood.common.model.ApiPagingResponse;
 import com.getir.readingisgood.domain.book.model.BookDto;
 import com.getir.readingisgood.domain.book.model.request.CreateBookRequest;
 import com.getir.readingisgood.domain.book.model.request.UpdateBookStockRequest;
@@ -14,6 +13,6 @@ public interface BookService {
 
 	BookDto getBookById(Long id);
 
-	List<BookDto> getBooks(int page, int size);
+	ApiPagingResponse<BookDto> getBooks(int page, int size);
 
 }

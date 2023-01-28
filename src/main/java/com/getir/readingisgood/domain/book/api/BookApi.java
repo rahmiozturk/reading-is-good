@@ -1,16 +1,12 @@
 package com.getir.readingisgood.domain.book.api;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
-
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.getir.readingisgood.common.model.ApiPagingResponse;
 import com.getir.readingisgood.domain.book.model.BookDto;
 import com.getir.readingisgood.domain.book.model.request.CreateBookRequest;
 import com.getir.readingisgood.domain.book.model.request.UpdateBookStockRequest;
@@ -39,7 +35,8 @@ public interface BookApi {
 
 	@ApiOperation(value = "", notes = "Get Book Pageable", nickname = "trackingTheStockOfBbooks", tags = { "Book_API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Get Books  Response") })
-	public ResponseEntity<List<BookDto>> getBooks(@RequestParam(value = "PAGE", defaultValue = "0") int page,
+	public ResponseEntity<ApiPagingResponse<BookDto>> getBooks(
+			@RequestParam(value = "PAGE", defaultValue = "0") int page,
 			@RequestParam(value = "SIZE", defaultValue = "10") int size);
 
 }

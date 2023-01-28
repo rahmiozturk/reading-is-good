@@ -24,11 +24,14 @@ import com.getir.readingisgood.domain.order.model.OrderDto;
 import com.getir.readingisgood.domain.order.model.request.CreateOrderRequest;
 import com.getir.readingisgood.domain.order.model.request.DateIntervalRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping(value = "/order", consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE }, produces = {
 		APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
 @SoftwareComponent(name = "OrderController", description = "Exposes end points to order process.", technologies = {
 		"java", "rest", "https" })
+@Slf4j
 public class OrderController implements OrderApi {
 
 	private OrderService orderService;
@@ -39,18 +42,20 @@ public class OrderController implements OrderApi {
 
 	@PostMapping("/create")
 	public ResponseEntity<OrderDto> createOrder(@RequestBody CreateOrderRequest createReq) {
+		log.info("createOrder customerId {}", createReq.getCustomerId());
 		return new ResponseEntity<>(orderService.createOrder(createReq), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<List<OrderDetailDto>> getOrderDetailByOrderId(@PathVariable("id") Long orderId) {
+		log.info("getOrderDetailByOrderId orderId {}", orderId);
 		return new ResponseEntity<>(orderService.getOrderDetailByOrderId(orderId), HttpStatus.OK);
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<List<OrderDto>> filterByOrderTime(
-			@Valid @RequestBody DateIntervalRequest dateIntervalRequest) {
-		return ResponseEntity.ok(orderService.getAllByOrderTimeDateBetween(dateIntervalRequest));
+	public ResponseEntity<List<OrderDto>> filterByOrderTime(@Valid @RequestBody DateIntervalRequest request) {
+		log.info("filterByOrderTime startDate {} - endDate", request.getStartDate(), request.getEndDate());
+		return ResponseEntity.ok(orderService.getAllByOrderTimeDateBetween(request));
 	}
 
 }
