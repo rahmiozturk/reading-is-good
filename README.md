@@ -6,12 +6,12 @@ vision operations
 
 ## Technology Stack
 
-- Java 11
-- Spring Boot
-- Maven
-- Docker Not Complete.
-* Spring Data JPA/ Data Rest
-* Spring Security for Basic Auth Not Complete.
+- Java 11.
+- Spring Boot.
+- Maven.
+- Docker.
+* Spring Data JPA/ Data Rest.
+* Spring Security for Basic Auth.
 * H2 In Memory database.
 * Lombok.
 * P6Spy.
