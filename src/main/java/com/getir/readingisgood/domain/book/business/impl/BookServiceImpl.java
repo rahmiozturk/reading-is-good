@@ -20,6 +20,7 @@ public class BookServiceImpl implements BookService {
 	private BookDataService bookDataService;
 	private BookConverter bookConverter;
 
+
 	public BookServiceImpl(BookDataService bookDataService, BookConverter bookConverter) {
 		this.bookDataService = bookDataService;
 		this.bookConverter = bookConverter;
@@ -44,7 +45,6 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookDto getBookById(Long bookId) {
-
 		BookEntity bookById = bookDataService.getBookById(bookId);
 		return bookConverter.convertToDto(bookById);
 	}

@@ -33,7 +33,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public CustomerDto createCustomer(CreateCustomerRequest createReq) {
-		customerDataService.checkEmailAlreadyExists(createReq.getEmail());
 		CustomerEntity entity = customerDataService.saveCustomer(customerConverter.convertToEntity(createReq));
 		return customerConverter.convertToDto(entity);
 	}

@@ -22,6 +22,7 @@ public class CustomerDataService {
 	}
 
 	public CustomerEntity saveCustomer(CustomerEntity entity) {
+		checkEmailAlreadyExists(entity.getEmail());
 		return customerRepository.save(entity);
 	}
 

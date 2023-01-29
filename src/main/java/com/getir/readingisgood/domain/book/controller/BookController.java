@@ -39,14 +39,14 @@ public class BookController implements BookApi {
 	}
 
 	@Override
-	@PostMapping("/create")
+	@PostMapping("/admin/create")
 	public ResponseEntity<BookDto> createBook(@Valid CreateBookRequest request) {
 		log.info("createBook {} to {}", request.getBookName(), request.getAmount());
 		return new ResponseEntity<>(bookService.createBook(request), HttpStatus.CREATED);
 	}
 
 	@Override
-	@PutMapping("/update")
+	@PutMapping("/admin/update")
 	public ResponseEntity<BookDto> updateBookStock(@Valid UpdateBookStockRequest request) {
 		log.info("updateBookStock bookId {}, amount {}", request.getBookId(), request.getAmount());
 		return new ResponseEntity<>(bookService.updateBookStock(request), HttpStatus.OK);
@@ -54,14 +54,14 @@ public class BookController implements BookApi {
 	}
 
 	@Override
-	@GetMapping("/{id}")
+	@GetMapping("/shared/{id}")
 	public ResponseEntity<BookDto> getBookById(@PathVariable("id") Long bookId) {
 		log.info("getBookById bookId {}", bookId);
 		return new ResponseEntity<>(bookService.getBookById(bookId), HttpStatus.OK);
 	}
 
 	@Override
-	@GetMapping("/all")
+	@GetMapping("/shared/all")
 	public ResponseEntity<ApiPagingResponse<BookDto>> getBooks(
 			@RequestParam(value = "PAGE", defaultValue = "0") int page,
 			@RequestParam(value = "SIZE", defaultValue = "10") int size) {

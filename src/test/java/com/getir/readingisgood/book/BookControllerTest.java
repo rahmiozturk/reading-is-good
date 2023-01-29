@@ -1,64 +1,94 @@
 package com.getir.readingisgood.book;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.getir.readingisgood.common.exception.BookIdNotFoundException;
+import com.getir.readingisgood.common.model.ApiPagingResponse;
+import com.getir.readingisgood.domain.book.business.impl.BookServiceImpl;
+import com.getir.readingisgood.domain.book.data.BookDataService;
 import com.getir.readingisgood.domain.book.entity.BookEntity;
 import com.getir.readingisgood.domain.book.model.BookDto;
 import com.getir.readingisgood.domain.book.model.request.CreateBookRequest;
-import com.getir.readingisgood.domain.book.model.request.UpdateBookStockRequest;
 import com.getir.readingisgood.domain.book.repository.BookRepository;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+
+@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class BookControllerTest {
 
-	@MockBean
-	private BookRepository bookRepository;
+	@InjectMocks
+	BookDataService bookDataService;
 
 	@Autowired
-	private MockMvc mockMvc;
+	BookServiceImpl bookService;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+	@Mock
+	BookRepository bookRepository;
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+	private static BookDto bookDto;
+	private static BookEntity bookEntity;
+
+	@BeforeEach
+	public void init() {
+		bookDto = BookDto.builder().id(1L).bookName("bookName1").authorName("authorName1").amount(10)
+				.price(BigDecimal.valueOf(61)).build();
+
+		bookEntity = BookEntity.builder().id(1L).bookName("bookName1").authorName("authorName1").amount(10)
+				.price(BigDecimal.valueOf(61)).build();
+	}
 
 	@Test
 	@Order(1)
-	public void addBook() throws Exception {
-		CreateBookRequest req = CreateBookRequest.builder().bookName("bookName1").price(BigDecimal.valueOf(61))
-				.authorName("author1").amount(10).build();
-		ResponseEntity<BookDto> response = restTemplate.postForEntity("/book/create", req, BookDto.class);
-		Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
+	public void getBookById_whenBookNotFound_thenBookIdNotFoundException() {
+		when(bookRepository.findById(any())).thenReturn(Optional.empty());
 
+		assertThrows(BookIdNotFoundException.class, () -> bookDataService.getBookById(bookEntity.getId()));
 	}
 
 	@Test
 	@Order(2)
-	public void updateBookStok() throws Exception {
-		BookEntity entity = BookEntity.builder().id(1L).amount(5).authorName("author2").bookName("bookbName2").price(BigDecimal.valueOf(50)).build();
-		
-		when(bookRepository.findById(1L)).thenReturn(Optional.of(entity));
-		
-		UpdateBookStockRequest req = UpdateBookStockRequest.builder().amount(60).bookId(1L).build();
-		ResponseEntity<BookDto> response = restTemplate.postForEntity("/book/update", req, BookDto.class);
-		Assertions.assertTrue(response.getBody().getAmount().equals(60L));
+	public void saveConsumer_thenReturnSuccessResponse() {
 
+		when(bookDataService.saveBook(bookEntity)).thenReturn(bookEntity);
+
+		BookEntity saveBook = bookDataService.saveBook(bookEntity);
+		assertNotNull(saveBook);
+		assertEquals(bookDto.getBookName(), saveBook.getBookName());
+	}
+
+	@Test
+	@Order(3)
+	public void createBookRequest() {
+		CreateBookRequest req = CreateBookRequest.builder().bookName("bookName1").authorName("authorName1").amount(10)
+				.price(BigDecimal.valueOf(61)).build();
+
+		BookDto createBook = bookService.createBook(req);
+		assertEquals(createBook.getBookName(), bookEntity.getBookName());
+	}
+
+	@Test
+	@Order(4)
+	public void getBookAllPageAble() {
+		int page = 0;
+		int size = 10;
+		ApiPagingResponse<BookDto> books = bookService.getBooks(page, size);
+		assertEquals(books.getCurrentPage(), page);
 	}
 
 }

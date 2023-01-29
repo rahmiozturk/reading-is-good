@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 
 import com.getir.readingisgood.common.model.BaseEntity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +20,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @SuperBuilder
 @Entity
 @Table(name = "Customers")
@@ -31,6 +29,9 @@ public class CustomerEntity extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(unique = true)
+	private String userId;
+	
 	@NotNull
 	private String name;
 	private String surname;
@@ -38,5 +39,7 @@ public class CustomerEntity extends BaseEntity {
 
 	@Column(unique = true)
 	private String email;
+
+	private String role = "USER";
 
 }

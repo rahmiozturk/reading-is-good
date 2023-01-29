@@ -15,6 +15,13 @@
 						{
 							"name": "create_book_1",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -30,13 +37,20 @@
 									"mode": "raw",
 									"raw": "{\n  \"amount\": 20,\n  \"authorName\": \"writer_1\",\n  \"bookName\": \"bookname_1\",\n  \"price\": 50\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/book/create"
+								"url": "http://localhost:8080/reading-is-good/book/admin/create"
 							},
 							"response": []
 						},
 						{
 							"name": "create_book_2",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -52,13 +66,20 @@
 									"mode": "raw",
 									"raw": "{\n  \"amount\": 50,\n  \"authorName\": \"writer_2\",\n  \"bookName\": \"bookname_2\",\n  \"price\": 1\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/book/create"
+								"url": "http://localhost:8080/reading-is-good/book/admin/create"
 							},
 							"response": []
 						},
 						{
 							"name": "create_book_3",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -74,7 +95,7 @@
 									"mode": "raw",
 									"raw": "{\n  \"amount\": 25,\n  \"authorName\": \"writer_3\",\n  \"bookName\": \"bookname_3\",\n  \"price\": 20\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/book/create"
+								"url": "http://localhost:8080/reading-is-good/book/admin/create"
 							},
 							"response": []
 						}
@@ -85,6 +106,33 @@
 					"item": [
 						{
 							"name": "get book stok",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": "http://localhost:8080/reading-is-good/book/shared/1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pageable get All Books stock",
+					"item": [
+						{
+							"name": "get books stock",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -98,27 +146,8 @@
 										"type": "text"
 									}
 								],
-								"url": "http://localhost:8080/reading-is-good/book/1"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "get All Books stock",
-					"item": [
-						{
-							"name": "get books stock",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
 								"url": {
-									"raw": "http://localhost:8080/reading-is-good/book/all?PAGE=0&SIZE=10",
+									"raw": "http://localhost:8080/reading-is-good/book/shared/all?PAGE=0&SIZE=10",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -127,6 +156,7 @@
 									"path": [
 										"reading-is-good",
 										"book",
+										"shared",
 										"all"
 									],
 									"query": [
@@ -151,6 +181,13 @@
 						{
 							"name": "update book stok",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "PUT",
 								"header": [
 									{
@@ -166,7 +203,7 @@
 									"mode": "raw",
 									"raw": "{\n  \"amount\": 61,\n  \"bookId\": 1\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/book/update"
+								"url": "http://localhost:8080/reading-is-good/book/admin/update"
 							},
 							"response": []
 						}
@@ -183,6 +220,13 @@
 						{
 							"name": "create customer 1",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -198,13 +242,20 @@
 									"mode": "raw",
 									"raw": "{\n  \"email\": \"customer1@gmail.com\",\n  \"name\": \"cusName1\",\n  \"phoneNumber\": \"0555333\",\n  \"surname\": \"cusSurname1\"\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/customer/create"
+								"url": "http://localhost:8080/reading-is-good/customer/admin/create"
 							},
 							"response": []
 						},
 						{
 							"name": "create customer 2",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -220,13 +271,20 @@
 									"mode": "raw",
 									"raw": "{\n  \"email\": \"customer2@gmail.com\",\n  \"name\": \"cusName2\",\n  \"phoneNumber\": \"0555334\",\n  \"surname\": \"cusSurname2\"\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/customer/create"
+								"url": "http://localhost:8080/reading-is-good/customer/admin/create"
 							},
 							"response": []
 						},
 						{
 							"name": "create customer email exception",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -242,7 +300,7 @@
 									"mode": "raw",
 									"raw": "{\n  \"email\": \"customer1@gmail.com\",\n  \"name\": \"cusName1\",\n  \"phoneNumber\": \"0555333\",\n  \"surname\": \"cusSurname1\"\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/customer/create"
+								"url": "http://localhost:8080/reading-is-good/customer/admin/create"
 							},
 							"response": []
 						}
@@ -266,7 +324,99 @@
 										"type": "text"
 									}
 								],
-								"url": "http://localhost:8080/reading-is-good/customer/1/orders"
+								"url": "http://localhost:8080/reading-is-good/customer/admin/1/orders"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "reportStats",
+					"item": [
+						{
+							"name": "Query Monthly Statistics",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": "http://localhost:8080/reading-is-good/customer/admin/1/stats"
+							},
+							"response": []
+						},
+						{
+							"name": "Query Monthly Statistics",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"url": "http://localhost:8080/reading-is-good/customer/admin/2/stats"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "pageable all customer",
+					"item": [
+						{
+							"name": "all customers",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "ADMIN",
+										"password": "ADMIN"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/reading-is-good/customer/admin/all?PAGE=0&SIZE=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reading-is-good",
+										"customer",
+										"admin",
+										"all"
+									],
+									"query": [
+										{
+											"key": "PAGE",
+											"value": "0"
+										},
+										{
+											"key": "SIZE",
+											"value": "10"
+										}
+									]
+								}
 							},
 							"response": []
 						}
@@ -283,6 +433,13 @@
 						{
 							"name": "customer1 order 1",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "user1",
+										"username": "user1"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -298,13 +455,20 @@
 									"mode": "raw",
 									"raw": "{\n    \"bookList\": [\n        {\n            \"amount\": 5,\n            \"bookId\": 1\n        },\n        {\n            \"amount\": 5,\n            \"bookId\": 2\n        }\n    ],\n    \"customerId\": 1\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/order/create"
+								"url": "http://localhost:8080/reading-is-good/order/user/create"
 							},
 							"response": []
 						},
 						{
 							"name": "customer1 order 2",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "user1",
+										"username": "user1"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -320,13 +484,20 @@
 									"mode": "raw",
 									"raw": "{\n    \"bookList\": [\n        {\n            \"amount\": 4,\n            \"bookId\": 2\n        },\n        {\n            \"amount\": 4,\n            \"bookId\": 3\n        }\n    ],\n    \"customerId\": 1\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/order/create"
+								"url": "http://localhost:8080/reading-is-good/order/user/create"
 							},
 							"response": []
 						},
 						{
 							"name": "customer1 order 3",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "user1",
+										"username": "user1"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -342,13 +513,20 @@
 									"mode": "raw",
 									"raw": "{\n    \"bookList\": [\n        {\n            \"amount\": 2,\n            \"bookId\": 2\n        },\n        {\n            \"amount\": 1,\n            \"bookId\": 3\n        }\n    ],\n    \"customerId\": 1\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/order/create"
+								"url": "http://localhost:8080/reading-is-good/order/user/create"
 							},
 							"response": []
 						},
 						{
 							"name": "customer2 order 1",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "user1",
+										"password": "user1"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -364,13 +542,20 @@
 									"mode": "raw",
 									"raw": "{\n  \"bookList\": [\n    {\n      \"amount\": 15,\n      \"bookId\": 1\n    },\n {\n      \"amount\": 15,\n      \"bookId\": 2\n    }\n  ],\n  \"customerId\": 2\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/order/create"
+								"url": "http://localhost:8080/reading-is-good/order/user/create"
 							},
 							"response": []
 						},
 						{
-							"name": "http://localhost:8080/reading-is-good/order/create Copy 2",
+							"name": "not enough stock",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "user1",
+										"password": "user1"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -384,9 +569,9 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"bookList\": [\n    {\n      \"amount\": 15,\n      \"bookId\": 1\n    },\n {\n      \"amount\": 15,\n      \"bookId\": 40\n    }\n  ],\n  \"customerId\": 1\n}"
+									"raw": "{\n  \"bookList\": [\n    {\n      \"amount\": 15,\n      \"bookId\": 1\n    },\n {\n      \"amount\": 100,\n      \"bookId\": 2\n    }\n  ],\n  \"customerId\": 1\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/order/create"
+								"url": "http://localhost:8080/reading-is-good/order/user/create"
 							},
 							"response": []
 						}
@@ -396,8 +581,15 @@
 					"name": "order details",
 					"item": [
 						{
-							"name": "http://localhost:8080/reading-is-good/order/{id}",
+							"name": "OrderDetails",
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "GET",
 								"header": [
 									{
@@ -410,7 +602,7 @@
 										"type": "text"
 									}
 								],
-								"url": "http://localhost:8080/reading-is-good/order/1"
+								"url": "http://localhost:8080/reading-is-good/order/shared/1"
 							},
 							"response": []
 						}
@@ -425,6 +617,13 @@
 								"disableBodyPruning": true
 							},
 							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "ADMIN",
+										"username": "ADMIN"
+									}
+								},
 								"method": "GET",
 								"header": [
 									{
@@ -438,9 +637,9 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"startDate\": \"2023-01-20T00:00:00.159+00:00\",\n  \"endDate\": \"2023-01-28T00:00:00.159+00:00\"\n}"
+									"raw": "{\n  \"startDate\": \"2023-01-20T00:00:00.159+00:00\",\n  \"endDate\": \"2023-02-25T00:00:00.159+00:00\"\n}"
 								},
-								"url": "http://localhost:8080/reading-is-good/order/search"
+								"url": "http://localhost:8080/reading-is-good/order/shared/search"
 							},
 							"response": []
 						}

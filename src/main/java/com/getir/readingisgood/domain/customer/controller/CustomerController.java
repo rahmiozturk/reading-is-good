@@ -39,13 +39,13 @@ public class CustomerController implements CustomerApi {
 		this.customerService = customerService;
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/admin/create")
 	public ResponseEntity<CustomerDto> createCustomer(@RequestBody CreateCustomerRequest createReq) {
 		log.info("createCustomer {} to {}", createReq.getEmail(), createReq.getName());
 		return new ResponseEntity<>(customerService.createCustomer(createReq), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/all")
+	@GetMapping("/admin/all")
 	public ResponseEntity<ApiPagingResponse<CustomerDto>> getCustomers(
 			@RequestParam(value = "PAGE", defaultValue = "0") int page,
 			@RequestParam(value = "SIZE", defaultValue = "10") int size) {
@@ -53,19 +53,19 @@ public class CustomerController implements CustomerApi {
 		return new ResponseEntity<>(customerService.getCustomers(page, size), HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/admin/{id}")
 	public ResponseEntity<CustomerDto> getCustomerById(@PathVariable("id") Long customerId) {
 		log.info("getCustomerById customerId {}", customerId);
 		return new ResponseEntity<>(customerService.getCustomerById(customerId), HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}/orders")
+	@GetMapping("/admin/{id}/orders")
 	public ResponseEntity<List<OrderDto>> getAllOrders(@PathVariable("id") Long customerId) {
 		log.info("getAllOrders customerId {}", customerId);
 		return new ResponseEntity<>(customerService.getAllOrders(customerId), HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}/stats")
+	@GetMapping("/admin/{id}/stats")
 	public ResponseEntity<List<CustomerReportDto>> getCustomerStats(@PathVariable("id") Long customerId) {
 		log.info("getCustomerStats customerId {}", customerId);
 		return new ResponseEntity<>(customerService.getStatsReport(customerId), HttpStatus.OK);

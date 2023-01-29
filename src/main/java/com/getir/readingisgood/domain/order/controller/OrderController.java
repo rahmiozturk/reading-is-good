@@ -39,19 +39,19 @@ public class OrderController implements OrderApi {
 		this.orderService = orderService;
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/user/create")
 	public ResponseEntity<OrderDto> createOrder(@RequestBody CreateOrderRequest createReq) {
 		log.info("createOrder customerId {}", createReq.getCustomerId());
 		return new ResponseEntity<>(orderService.createOrder(createReq), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/shared/{id}")
 	public ResponseEntity<List<OrderDetailDto>> getOrderDetailByOrderId(@PathVariable("id") Long orderId) {
 		log.info("getOrderDetailByOrderId orderId {}", orderId);
 		return new ResponseEntity<>(orderService.getOrderDetailByOrderId(orderId), HttpStatus.OK);
 	}
 
-	@GetMapping("/search")
+	@GetMapping("/shared/search")
 	public ResponseEntity<List<OrderDto>> filterByOrderTime(@Valid @RequestBody DateIntervalRequest request) {
 		log.info("filterByOrderTime startDate {} - endDate", request.getStartDate(), request.getEndDate());
 		return ResponseEntity.ok(orderService.getAllByOrderTimeDateBetween(request));

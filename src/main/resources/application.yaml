@@ -42,18 +42,3 @@ management:
          enabled: true
       readinessstate:
          enabled: true
-api:
-  authorization:
-    users:
-      admin:
-        password: "{noop}admin"
-        config:
-          timeout: true
-          roles:
-            - ADMIN
-      user:
-        password: "{noop}user"
-        config:
-          timeout: true
-          roles:
-            - USER

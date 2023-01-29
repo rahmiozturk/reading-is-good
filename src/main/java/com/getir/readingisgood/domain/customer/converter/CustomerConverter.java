@@ -1,5 +1,7 @@
 package com.getir.readingisgood.domain.customer.converter;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Component;
 
 import com.getir.readingisgood.domain.customer.entity.CustomerEntity;
@@ -19,6 +21,8 @@ public class CustomerConverter {
 		entity.setName(req.getName());
 		entity.setSurname(req.getSurname());
 		entity.setPhoneNumber(req.getPhoneNumber());
+		entity.setUserId(UUID.randomUUID().toString());
+		entity.setRole("USER");
 		return entity;
 	}
 }
