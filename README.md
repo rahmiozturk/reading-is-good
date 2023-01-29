@@ -59,17 +59,20 @@ http://localhost:8080/reading-is-good/swagger-ui.html
 
 • Open Postman and Import collection and Explore APIs via that. 
 
+- *Postman Collection:* [Download](https://github.com/rahmiozturk/reading-is-good/blob/master/src/main/resources/Reading-Is-Good.postman_collection.json)
+
 # Database H2
 
 • Visit 'http://localhost:8080/reading-is-good/h2-console' on browser.
 
 • User Name: ='sa' and Password: = 'sa'.
 
-- *Postman Collection:* [Download](https://github.com/rahmiozturk/reading-is-good/blob/master/src/main/resources/Reading-Is-Good.postman_collection.json)
+
 
 # Spring Basic Authentication
 inmemory
 • User Name: ='ADMIN' and Password: = 'ADMIN'. -> ADMIN
+
 • User Name: ='user1' and Password: = 'user1'. -> USER
 
 
